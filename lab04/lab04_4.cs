@@ -25,11 +25,13 @@ public class lab04_4 : MonoBehaviour
 
         // wykonujemy rotacjê wokó³ osi Y
         player.Rotate(Vector3.up * mouseXMove);
-       
+
         // a dla osi X obracamy kamerê dla lokalnych koordynatów
         // -mouseYMove aby unikn¹æ ofektu mouse inverse
-        transform.Rotate(new Vector3(-mouseYMove, 0f, 0f), Space.Self);
-        transform.rotation = Quaternion.Euler(Mathf.Clamp(transform.rotation.eulerAngles.x, -90f, 90f), 0f, 0f);
+        Quaternion newRotation = transform.localRotation;
+        newRotation *= Quaternion.Euler(-mouseYMove, 0, 0);
+        if (newRotation.eulerAngles.y != 180)
+            transform.Rotate(new Vector3(-mouseYMove, 0f, 0f), Space.Self);
 
     }
 }

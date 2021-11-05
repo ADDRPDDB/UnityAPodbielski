@@ -5,11 +5,18 @@ using UnityEngine;
 public class MoveWithCharacterController : MonoBehaviour
 {
     private CharacterController controller;
-    private Vector3 playerVelocity;
+    public Vector3 playerVelocity;
     private bool groundedPlayer;
     private float playerSpeed = 10.0f;
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
+
+    public void explode()
+    {
+        playerVelocity.y += 3*Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+    }
+
+    public Vector3 getPlayerVelocity() { return playerVelocity; }
 
     private void Start()
     {
